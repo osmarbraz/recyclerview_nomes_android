@@ -174,11 +174,11 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
 
     /**
      * Método de conveniência para obter dados na posição de clique
-     * @param id
+     * @param i
      * @return
      */
-    String getItem(int id) {
-        return listaNomes.get(id);
+    String getItem(int i) {
+        return listaNomes.get(i);
     }
 
     /**
