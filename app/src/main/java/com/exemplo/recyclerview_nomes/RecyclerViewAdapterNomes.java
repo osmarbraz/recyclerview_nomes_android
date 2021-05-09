@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewAdapterNomes.ViewHolderNome> {
@@ -25,13 +26,29 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
 
     /**
      * construtor para passar os dados para o RecyclerView de Clientes
-     * @param context
-     * @param data
+     * @param context Activity que chamou a classe
+     * @param listaNomes Lista com os dados
      */
-    RecyclerViewAdapterNomes(Context context, List<String> data) {
+    RecyclerViewAdapterNomes(Context context, List<String> listaNomes) {
         this.inflater = LayoutInflater.from(context);
-        this.listaNomes = data;
+        this.listaNomes = listaNomes;
         this.context = context;
+    }
+
+    /**
+     * Get para lista de nomes
+     * @return
+     */
+    public List<String> getListaNomes() {
+        return listaNomes;
+    }
+
+    /**
+     * Set para lista de nomes
+     * @param listaNomes
+     */
+    public void setListaNomes(ArrayList<String> listaNomes) {
+        this.listaNomes = listaNomes;
     }
 
     /**
@@ -48,7 +65,7 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
     }
 
     /**
-     *  liga os dados ao TextView em cada linha
+     * liga os dados ao TextView em cada linha
      * @param holder
      * @param posicao
      */
@@ -72,7 +89,10 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
         });
     }
 
-    // retorna o total de linhas
+    /**
+     *  Retorna o total de linhas da lista
+     * @return Um inteiro
+     */
     @Override
     public int getItemCount() {
         return listaNomes.size();
@@ -83,8 +103,10 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
      * @param novo Um nome
      */
     public void adicionarNome(String novo){
-        listaNomes.add(novo); //adiciona o item na ultima posicao
-        notifyDataSetChanged();// notifica que meus items foi alterado
+        // Adiciona o item na ultima posicao
+        listaNomes.add(novo);
+        // Notifica as mudanças a Recycler View
+        notifyDataSetChanged();
     }
 
     /**
@@ -92,7 +114,9 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
      * @param posicao Posição do nome a ser excluído
      */
     public void removerNome(int posicao){
-        listaNomes.remove(posicao); //remove o item na posição desejada
+        // Remove o item na posição desejada
+        listaNomes.remove(posicao);
+        // Notifica as mudanças a Recycler View
         notifyDataSetChanged();
     }
 
@@ -103,7 +127,7 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
      */
     public void alterarNomeClick(int posicao, String novo){
         Intent intent = new Intent(context, MainActivity2.class);
-        //Armazena o valor no intent
+        // Armazena o valor no intent
         intent.putExtra("posicao",posicao);
         intent.putExtra("nome", getItem(posicao));
         // Abre a segunda tela
@@ -118,15 +142,22 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
      */
     public void alterarNome(int posicao, String alterado){
         listaNomes.set(posicao, alterado); //Atualiza o item na posição desejada
+        // Notifica as mudanças a Recycler View
         notifyDataSetChanged();
     }
 
-    // armazena e recicla as visualizações à medida que elas são deslizadas para fora da tela
+    /**
+     * Armazena e recicla as visualizações à medida que elas são deslizadas para fora da tela
+     */
     public class ViewHolderNome extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView textViewNome;
         ImageButton buttonExcluir;
         ImageButton buttonAlterar;
 
+        /**
+         * Construtor do ViewHolder de nomes.
+         * @param itemView
+         */
         ViewHolderNome(View itemView) {
             super(itemView);
             textViewNome = itemView.findViewById(R.id.textViewNome);
@@ -141,17 +172,26 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
         }
     }
 
-    // método de conveniência para obter dados na posição de clique
+    /**
+     * Método de conveniência para obter dados na posição de clique
+     * @param id
+     * @return
+     */
     String getItem(int id) {
         return listaNomes.get(id);
     }
 
-    // permite que os eventos de cliques sejam capturados
+    /**
+     * Permite que os eventos de cliques sejam capturados
+     * @param itemClickListener
+     */
     void setClickListener(ItemClickListener itemClickListener) {
         this.clickListener = itemClickListener;
     }
 
-    // interface método para responder a eventos de cliques
+    /**
+     * Interface do método para responder a eventos de cliques
+     */
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
