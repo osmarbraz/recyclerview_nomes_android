@@ -5,15 +5,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements RecyclerViewNomes.ItemClickListener {
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapterNomes.ItemClickListener {
     //https://medium.com/@brunoqualhato/android-como-criar-um-adapter-com-java-e-recyclerview-a2db50b9a96e
-    private RecyclerViewNomes adapter;
+    private RecyclerViewAdapterNomes adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,21 +20,21 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewNomes
         setContentView(R.layout.activity_main);
 
         //dados para preencher o RecyclerView com
-        ArrayList<String> arrayDeNomes = new ArrayList<>();
-        //Adiciona nomes
-        arrayDeNomes.add("Bruno");
-        arrayDeNomes.add("Carlos");
-        arrayDeNomes.add("Pedro");
-        arrayDeNomes.add("João");
-        arrayDeNomes.add("Zé");
+        ArrayList<String> listaNomes = new ArrayList<>();
+        // Adiciona nomes
+        listaNomes.add("Bruno");
+        listaNomes.add("Carlos");
+        listaNomes.add("Pedro");
+        listaNomes.add("João");
+        listaNomes.add("Zé");
 
-        // configura o RecyclerView
+        // Configura o RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rv_nomes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Visualização em lista
-        //recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // Visualização em grid com 2 colunas
-        adapter = new RecyclerViewNomes(this, arrayDeNomes);
+        adapter = new RecyclerViewAdapterNomes(this, listaNomes);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+
     }
 
     @Override
