@@ -72,18 +72,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
      * Verifica o resultado do retorno da chamada de um activity.
      * @param requestCode Código da requisição
      * @param resultCode Código de retorno
-     * @param data Dados do intent
+     * @param intent Dados do intent
      */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         //Executa no retorno das telas
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, intent);
         //Se o retorno foi Ok
         if (resultCode == RESULT_OK) {
             //Verifica se os dados foram preenchidos
-            if  (data.hasExtra("nome")) {
-                int posicao = data.getExtras().getInt("posicao");
-                String nome = data.getExtras().getString("nome");
+            if  (intent.hasExtra("nome")) {
+                int posicao = intent.getExtras().getInt("posicao");
+                String nome = intent.getExtras().getString("nome");
                 // Valor novo
                 if (posicao == -1) {
                     //Adiciona os dados na lista

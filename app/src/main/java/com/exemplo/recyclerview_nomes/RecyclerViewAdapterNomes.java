@@ -23,14 +23,23 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
     private ItemClickListener clickListener;
     private Context context;
 
-    // construtor para passar os dados
+    /**
+     * construtor para passar os dados para o RecyclerView de Clientes
+     * @param context
+     * @param data
+     */
     RecyclerViewAdapterNomes(Context context, List<String> data) {
         this.inflater = LayoutInflater.from(context);
         this.listaNomes = data;
         this.context = context;
     }
 
-    // infla o layout da linha de xml quando necessário
+    /**
+     * infla o layout da linha de xml quando necessário
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public ViewHolderNome onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,7 +47,11 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
         return new ViewHolderNome(view);
     }
 
-    // liga os dados ao TextView em cada linha
+    /**
+     *  liga os dados ao TextView em cada linha
+     * @param holder
+     * @param posicao
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolderNome holder, int posicao) {
         String nome = listaNomes.get(posicao);
@@ -100,10 +113,11 @@ public class RecyclerViewAdapterNomes extends RecyclerView.Adapter<RecyclerViewA
 
     /**
      * Altera um nome da lista pela posição
-     * @param posicao Posição do nome a ser excluído
+     * @param posicao Posição do nome a ser alterado
+     * @param alterado O nome para alteração
      */
-    public void alterarNome(int posicao, String novo){
-        listaNomes.set(posicao, novo); //Atualiza o item na posicao desejada
+    public void alterarNome(int posicao, String alterado){
+        listaNomes.set(posicao, alterado); //Atualiza o item na posição desejada
         notifyDataSetChanged();
     }
 

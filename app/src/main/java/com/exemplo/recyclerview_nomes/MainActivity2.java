@@ -40,17 +40,15 @@ public class MainActivity2 extends AppCompatActivity {
 
     public void onClickBotaoSalvar(View v) {
         //Retorna os dados do cliente
-        Intent data = new Intent();
-        Bundle parms = new Bundle();
+        Intent intent = new Intent();
         //Se o id do cliente é vazio retorna cancelado
         if (editTextNome.getText().toString().equals("")) {
             setResult(RESULT_CANCELED);
         } else {
             //Dados preenchido
-            parms.putInt("posicao", posicao);
-            parms.putString("nome", editTextNome.getText().toString());
-            data.putExtras(parms);
-            setResult(RESULT_OK, data);
+            intent.putExtra("posicao", posicao);
+            intent.putExtra("nome", editTextNome.getText().toString());
+            setResult(RESULT_OK, intent);
         }
         //Fecha a janela
         finish();
